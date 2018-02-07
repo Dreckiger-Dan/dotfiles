@@ -1,0 +1,94 @@
+! Xft settings ---------------------------------------------------------
+Xft.autohint:   0
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+Xft.lcdfilter:  lcddefault
+
+
+!------------------------------------------------------------------------------
+! u r x v t
+  
+URxvt.font: xft:Monaco:pixelsize=10,style=regular,\
+            xft:Kochi Gothic:antialias=false,\
+            xft:Baekmuk Gulim
+URxvt*urlLauncher:      chromium
+URxvt*scrollBar:        false
+URxvt*saveLines:  		10000
+URxvt*termName:    		rxvt-unicode-256color
+URxvt.perl-ext-common: 	default,matcher
+URxvt*borderless:         true
+URxvt*internalBorder:     15
+URxvt.letterSpace: 		-1
+
+!
+! borders
+!
+!URxvt*externalBorder:     1
+!URxvt*internalBorder:     1
+! remove border
+!URxvt*borderLess:         false
+
+!------------------------------------------------------------------------------
+! c o l o r -  s e t t i n g s
+! special
+*.foreground:   #c5c8c6
+*.background:   #383c4a
+*.cursorColor:  #c5c8c6
+
+! black
+*.color0:       #404552
+*.color8:       #4b5162
+
+! red
+*.color1:       #7c3535
+*.color9:       #923232
+
+! green
+*.color2:       #6d7334
+*.color10:      #a1ab3e
+
+! yellow
+*.color3:       #8f5b37
+*.color11:      #af7e4a
+
+! blue
+*.color4:       #3c6b92
+*.color12:      #5294e2
+
+! magenta
+*.color5:       #6c4679
+*.color13:      #9f41bb
+
+! cyan
+*.color6:       #356c65
+*.color14:      #3c897e
+
+! white
+*.color7:       #425568
+*.color15:      #45617d
+
+!----------------------------
+! rofi
+! Arc Dark
+rofi.color-enabled: true
+rofi.color-window: #383c4a, #383c4a, #383c4a
+rofi.color-normal: #404552, #ffffff, #404552, #304d72, #ffffff
+rofi.color-active: #fdf6e3, #268bd2, #eee8d5, #268bd2, #fdf6e3
+rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
+
+rofi.separator-style: solid
+rofi.sidebar-mode: true
+rofi.bw: 1
+rofi.columns: 1
+rofi.padding: 16
+
+rofi.yoffset: 0
+rofi.fake-transparency: false
+rofi.location: 0
+rofi.width: 50
+rofi.font: Monaco 13
+rofi.lines: 10
+rofi.fixed-num-lines: true
