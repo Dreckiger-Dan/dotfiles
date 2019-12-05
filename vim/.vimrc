@@ -1,4 +1,5 @@
 "" General
+set nocompatible
 set number	        " Show line numbers
 set nolist              " list disables linebreak
 set linebreak	        " Break lines at word (requires Wrap lines)
@@ -18,3 +19,10 @@ set smarttab	        " Enable smart-tabs
 set softtabstop=4	" Number of spaces per Tab
  
 set ruler	        " Show row and column ruler information
+
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
+
+" Search in subdirectories
+set path+=**

@@ -40,8 +40,8 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+space exec rofi -show run
+bindsym $mod+ctrl+space exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu'
+bindsym $mod+space exec rofi -show drun
 
 # change focus
 bindsym $mod+h focus left
@@ -93,6 +93,14 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# set monitor variables
+set $monL DP-1
+set $monR DP-0
+
+# assign workspaces to specific outputs
+workspace 1 output $monL
+workspace 5 output $monR
+
 # switch to workspace
 bindsym $mod+1 workspace number 1
 bindsym $mod+2 workspace number 2
@@ -118,6 +126,7 @@ bindsym $mod+Shift+9 move container to workspace number 9
 bindsym $mod+Shift+0 move container to workspace number 10
 
 assign [class="Evolution"] 1
+assign [class="Discord"] 1
 assign [class="Steam"] 5
 assign [class="Lutris"] 5
 
@@ -136,10 +145,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym o resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -163,7 +172,7 @@ set $text-color-inactive #676e7d
 # window colors
 #			border		   background	      text
 client.focused		$bg-color	   $bg-color	      $text-color
-client.unfocused	$bg-color-inactive $bg-color-inactive $text-color-inactive
+client.ujfocused	$bg-color-inactive $bg-color-inactive $text-color-inactive
 client.focused_inactive	$bg-color-inactive $bg-color-inactive $text-color-inactive
 client.urgent		$bg-color-urgent   $bg-color-urgent   $text-color
 
@@ -194,27 +203,29 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Pulse Audio controls
-set $volumecmd pactl set-sink-volume alsa_output.usb-Yoyodyne_Consulting_ODAC-revB-01.iec958-stereo
-bindsym XF86AudioRaiseVolume exec --no-startup-id $setvolumecmd +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id $setvolumecmd -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-bindsym $mod+plus exec --no-startup-id $setvolumecmd +5% #increase sound volume
-bindsym $mod+shift+ctrl+Up exec pactl set-sink-volume alsa_output.usb-Yoyodyne_Consulting_ODAC-revB-01.iec958-stereo +5%
-bindsym $mod+shift+ctrl+Down exec pactl set-sink-volume alsa_output.usb-Yoyodyne_Consulting_ODAC-revB-01.iec958-stereo -5%
-bindsym $mod+shift+ctrl+Down+Up exec pactl set-sink-mute 0 toggle
+set $volumecmd pactl set-sink-volume 1 
+bindsym XF86AudioRaiseVolume exec --no-startup-id $volumecmd +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id $volumecmd -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
+bindsym $mod+shift+ctrl+Up exec $volumecmd +5%
+bindsym $mod+shift+ctrl+Down exec $volumecmd -5%
+bindsym $mod+shift+ctrl+Down+Up exec pactl set-sink-mute 1 toggle
 
 # Monitor settings
 # 2x1080 hor + 4k
 #exec_always xrandr --output DVI-D-0 --off --output HDMI-0 --mode 1920x1080 --pos 0x240 --rotate left --output DVI-I-1 --mode 1920x1080 --pos 4920x240 --rotate left --output DVI-I-0 --off --output DP-1 --off --output DP-0 --primary --mode 3840x2160 --pos 1080x0 --rotate normal
 # 1080 hor 1080 vert
-exec_always xrandr --output DVI-D-0 --off --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate left --output DVI-I-1 --off --output DVI-I-0 --off --output DP-1 --off --output DP-0 --mode 1920x1080 --pos 1080x0 --rotate normal
-exec_always ~/.screenlayout/horvert.sh
+exec_always xrandr --output DVI-D-0 --off --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate left --output DVI-I-1 --off --output DVI-I-0 --off --output DP-1 --off --output DP-0 --mode 1920x1080 --pos 1080x0 --rotate normal --primary --rate 120
+#exec_always ~/.screenlayout/horvert.sh
 
 # Mount drives
-exec_always sudo mount /dev/sdd1 /run/media/`whoami`/HDD\ 2TB
+set $sdd1 /run/media/`whoami`/HDD\ 2TB
+exec_always sudo mkdir $sdd1 
+exec_always sudo mount /dev/sdd1 $sdd1
 
 exec steam
 exec evolution
+exec --no-startup-id compton
 #exec_always feh --bg-fill ~/Pictures/wallpaper.jpg
-exec_always ~/repos/i3-wpd/i3wpd.py ~/Pictures/wallpapers ".png"
-exec_always autoname_workspaces.py
+exec_always i3-wpd/i3wpd.py ~/Pictures/wallpapers ".png"
+exec_always i3scripts/autoname_workspaces.py

@@ -1,0 +1,9 @@
+[submodule "i3/.config/i3/i3scripts"]
+	path = i3/.config/i3/i3scripts
+	url = git@github.com:Dreckiger-Dan/i3scripts.git
+[submodule "vim/.vim/bundle/vim-surround"]
+	path = vim/.vim/bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "i3/.config/i3/i3-wpd"]
+	path = i3/.config/i3/i3-wpd
+	url = https://github.com/jomiq/i3-wpd.git
