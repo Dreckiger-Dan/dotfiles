@@ -1,0 +1,5 @@
+rofi.font:      Hack Regular 10
+rofi.theme:     ~/.cache/wal/colors-rofi-dark.rasi
+rofi.modi:      window,drun,ssh
+rofi.show-icons true
+rofi.icon-theme hicolor
